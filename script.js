@@ -105,7 +105,133 @@ const questions = [
             { text: "NEW DELHI TO BHOPAL", correct: true },
             { text: "NEW DELHI TO AGRA", correct: false }
         ]
-    }
+    },
+    {
+        question: "How many member's in BIHAR vidhan sabha?",
+        answers: [
+            { text: "239", correct: false },
+            { text: "240", correct: false },
+            { text: "241", correct: false },
+            { text: "242", correct: true }
+        ]
+    },
+    {
+        question: "How many member's in BIHAR lok sabha?",
+        answers: [
+            { text: "38", correct: false },
+            { text: "39", correct: false },
+            { text: "40", correct: true },
+            { text: "41", correct: false }
+        ]
+    },
+    {
+        question: "In which year did BIHAR state establish?",
+        answers: [
+            { text: "1 APRIL 1933", correct: false },
+            { text: "1 APRIL 1934", correct: false },
+            { text: "1 APRIL 1935", correct: false },
+            { text: "1 APRIL 1936", correct: true }
+        ]
+    },
+    {
+        question: "Which is the INDIA smallest contry?",
+        answers: [
+            { text: "DELHI", correct: false },
+            { text: "UP", correct: false },
+            { text: "MP", correct: false },
+            { text: "SIKKIM", correct: true }
+        ]
+    },
+    {
+        question: "In which year does submarine invented?",
+        answers: [
+            { text: "1764", correct: false },
+            { text: "1765", correct: false },
+            { text: "1766", correct: true },
+            { text: "1767", correct: false }
+        ]
+    },
+    {
+        question: "In which year does Fountain pen invented?",
+        answers: [
+            { text: "1841",correct: false },
+            { text: "1842", correct: false },
+            { text: "1843", correct: false },
+            { text: "1844", correct: true }
+        ]
+    },
+    {
+        question: "In which year does Balloon invented?",
+        answers: [
+            { text: "1781", correct: false },
+            { text: "1782", correct: false },
+            { text: "1783", correct: true },
+            { text: "1784", correct: false }
+        ]
+    },
+    {
+        question: "In which year does Lamp invented?",
+        answers: [
+            { text: "1877", correct: false },
+            { text: "1878", correct: false },
+            { text: "1879", correct: true },
+            { text: "1880", correct: false }
+        ]
+    },
+    {
+        question: "How many types of passenger's coache are distributed?",
+        answers: [
+            { text: "1", correct: false },
+            { text: "2", correct: false },
+            { text: "3", correct: true },
+            { text: "4", correct: false }
+        ]
+    },
+    {
+        question: "How many types of coaches in railway?",
+        answers: [
+            { text: "1", correct: false },
+            { text: "2", correct: true },
+            { text: "3", correct: false },
+            { text: "4", correct: false }
+        ]
+    },
+    {
+        question: "Which type of currency run in Japan?",
+        answers: [
+            { text: "POUND", correct: false },
+            { text: "DOLLER", correct: false },
+            { text: "YEN", correct: true },
+            { text: "RUPPEES", correct: false }
+        ]
+    },
+    {
+        question: "Which type of currency runs in BANGLADESH?",
+        answers: [
+            { text: "WON", correct: false },
+            { text: "YEN", correct: false },
+            { text: "REED", correct: false },
+            { text: "TAKKA", correct: true }
+        ]
+    },
+    {
+        question: "Which type of currency runs in BANGLADESH?",
+        answers: [
+            { text: "WON", correct: false },
+            { text: "YEN", correct: false },
+            { text: "REED", correct: false },
+            { text: "TAKKA", correct: true }
+        ]
+    },
+    {
+        question: "How many types of  passenger coaches?",
+        answers: [
+            { text: "0", correct: false },
+            { text: "1", correct: false },
+            { text: "2", correct: false },
+            { text: "3", correct: true }
+        ]  
+    },
 ];
 
     const quizContainer = document.getElementById("quiz-container");
@@ -114,6 +240,8 @@ const questions = [
     const answerButtonsElement = document.getElementById("answer-buttons");
     const nextButton = document.getElementById("next-btn");
     const quizTitle = document.getElementById("quiz-title");
+    const quizForm = document.querySelector("#quiz-form");
+    const resultMessage = document.querySelector("#result-message");
 
     let currentQuestionIndex = 0;
     let score = 0;
@@ -148,7 +276,7 @@ const questions = [
                 currentQuestionIndex++;
                 setNextQuestion();
             });
-            
+
             function setNextQuestion() {
                 resetState();
                 showQuestion(questions[currentQuestionIndex]);
@@ -245,8 +373,9 @@ const questions = [
                         Array.from(answerButtonsElement.children).forEach(button => {
                         setStatusClass(button, button.dataset.correct);
                         });
+                        score += 1
                         if (correct) {
-                        score++;
+                            scoreBox.innerHTML = "Score: " + score;;
                         }
                         if (currentQuestionIndex < questions.length - 1) {
                         nextButton.style.display = "block";
@@ -258,7 +387,27 @@ const questions = [
                             });
                           });
                           
-                        
+                          quizForm.addEventListener("submit", function(event) {
+                            // Prevent the default form submission behavior
+                            event.preventDefault();
+                          
+                            // Get the user's answer from the form input element
+                            const userAnswer = quizForm.elements["answer"].value;
+                          
+                            // Check if the user's answer is correct
+                            if (userAnswer === answer) {
+                              // If the answer is correct, display a success message
+                              resultMessage.textContent = "Congratulations! You got it right!";
+                            } else {
+                              // If the answer is wrong, display a failure message and end the quiz
+                              resultMessage.textContent = "Game Over. Sorry, you got it wrong.";
+                              quizForm.elements["answer"].disabled = true; // Disable the form input
+                              quizForm.elements["submit"].disabled = true; // Disable the form submit button
+                            }
+                          });
+
+
+
                           const element = document.querySelector("#my-element");
                           if (element) {
                             element.classList.add("highlight");
