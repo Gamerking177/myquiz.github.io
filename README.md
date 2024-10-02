@@ -45,8 +45,7 @@ To play this game on your own computer:
 
 1. **Clone the Repository**:
 Copy code
-```
-bash
+```bash
 git clone hhttps://github.com/YadavAkhileshh/Alien-Invasion-Defense.git
 ```
 2. Open the project folder and double-click the index.html file to open it in your browser.
