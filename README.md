@@ -46,7 +46,9 @@ To play this game on your own computer:
 1. **Clone the Repository**:
 Copy code
 ```bash
-git checkout -b feature-branch
+  git checkout -b feature-branch 
+```
+
 2. Open the project folder and double-click the index.html file to open it in your browser.
 3. Start defending your base against the alien invasion!
 
